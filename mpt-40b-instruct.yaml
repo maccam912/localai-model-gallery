@@ -1,0 +1,32 @@
+name: "mpt-30b-instruct"
+
+description: |
+    MPT-30B-Instruct is a model for short-form instruction following. It is built by finetuning MPT-3B on a dataset.
+    
+license: "CC-By-SA-3.0"
+
+config_file: |
+    backend: gpt4all-mpt
+    parameters:
+      model: ggml-mpt-30b-instruct.bin
+      top_k: 80
+      temperature: 0.2
+      top_p: 0.7
+    context_size: 8192
+    f16: true
+    template:
+      completion: "mpt-completion"
+      chat: mpt-instruct-chat
+
+files:
+    - filename: "mpt-30b-instruct.ggmlv0.q8_0.bin"
+      sha256: "c190c3791ad094094a08bccfc071f338f5c6c14cd441e5c781e2ba479a7c9540"
+      uri: "https://huggingface.co/TheBloke/mpt-30B-instruct-GGML/resolve/main/mpt-30b-instruct.ggmlv0.q8_0.bin"
+
+prompt_templates:
+- name: "mpt-completion"
+  content: |
+    Below is an instruction that describes a task. Write a response that appropriately completes the request. ### Instruction: Complete the following sentence: {{.Input}} ### Response:
+- name: "mpt-instruct-chat"
+  content: |
+    Below is an instruction that describes a task. Write a response that appropriately completes the request. ### Instruction: {{.Input}} ### Response:
